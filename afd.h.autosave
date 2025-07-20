@@ -1,0 +1,34 @@
+#ifndef AFD_H
+#define AFD_H
+
+#include <vector>
+#include <string>
+#include <transicao.h>
+
+using namespace std;
+
+class afd
+{
+private:
+    vector<char> alfabeto;
+    vector<string> estados;
+    vector<string> estados_finais;
+    vector<transicao> transicoes;
+    string estado_inicial;
+public:
+    
+    //Construtor
+    afd();
+    
+    void add_simbolo(char s);
+    void add_estado(const string& estado);
+    void add_estado_final(const string& estado);
+    void add_transicao(const transicao& t);
+    
+    bool eh_final(const string& estado) const;
+    strinf prox_estado
+    
+    
+};
+
+#endif // AFD_H
