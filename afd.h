@@ -18,7 +18,6 @@ public:
     void add_simbolo(char s);
     void add_estado(const string& estado);
     void add_estado_final(const string& estado);
-    void add_transicao(const transicao& t);
     void add_transicao(char s, string& origem, string& destino);
     
     bool eh_estado_final(const string& estado) const;
