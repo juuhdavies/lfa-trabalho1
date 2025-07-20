@@ -21,9 +21,15 @@ void afd::add_estado_final(const string& estado){
     this->estados_finais.push_back(estado);
 }
 
+
 void afd::add_transicao(const transicao& t){
     this->transicoes.push_back(t);
 }
+
+void afd::add_transicao(char s, string& origem, string& destino){
+    add_transicao(transicao(s, origem, destino));
+}
+
 
 bool afd::eh_estado_final(const string& estado) const{
     return find(estados_finais.begin(), estados_finais.end(), estado) != estados_finais.end();
