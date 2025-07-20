@@ -3,8 +3,28 @@
 
 class afd
 {
+private:
+    vector<char> alfabeto;
+    vector<string> estados;
+    vector<string> estados_finais;
+    vector<transicao> transicoes;
+    string estado_inicial;
 public:
+    
+    //Construtor
     afd();
+    
+    //usar quando for ler os estados do arquivo para armazenar
+    void add_simbolo(char s);
+    void add_estado(const string& estado);
+    void add_estado_final(const string& estado);
+    void add_transicao(const transicao& t);
+    
+    bool eh_estado_final(const string& estado) const;
+    string prox_estado(const string& estado_atual, char simbolo) const;
+    
+    void mostrar();
+    
 };
 
 #endif // AFD_H
