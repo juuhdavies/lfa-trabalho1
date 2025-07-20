@@ -21,7 +21,7 @@ public:
     void add_transicao(const transicao& t);
     
     bool eh_estado_final(const string& estado) const;
-    string prox_estado(const string& estado_atual, char simbolo) const;
+    string prox_estado(const string& estado_atual, char s) const;
     
     void mostrar();
     
