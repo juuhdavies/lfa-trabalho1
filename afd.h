@@ -19,6 +19,7 @@ public:
     void add_estado(const string& estado);
     void add_estado_final(const string& estado);
     void add_transicao(const transicao& t);
+    void add_transicao(char s, string& origem, string& destino);
     
     bool eh_estado_final(const string& estado) const;
     string prox_estado(const string& estado_atual, char s) const;
