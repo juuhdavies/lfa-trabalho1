@@ -22,13 +22,11 @@ void afd::add_estado_final(const string& estado){
 }
 
 
-void afd::add_transicao(const transicao& t){
-    this->transicoes.push_back(t);
+void afd::add_transicao(char s, string& origem, string& destino){
+    transicao t(s, origem, destino);
+    transicoes.push_back(t);
 }
 
-void afd::add_transicao(char s, string& origem, string& destino){
-    add_transicao(transicao(s, origem, destino));
-}
 
 
 bool afd::eh_estado_final(const string& estado) const{
