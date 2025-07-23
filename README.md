@@ -1,5 +1,5 @@
 # Trabalho de Linguagens Formais e Automatos
-# Alunos: Alexandre Alves Maciel Filho, Arthur G. S. Marques, Julia Davies
+Alunos: Alexandre Alves Maciel Filho, Arthur G. S. Marques, Julia Davies
 ================================================================================
 
 # Como usar
