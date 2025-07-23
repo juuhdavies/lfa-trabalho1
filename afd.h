@@ -9,13 +9,12 @@ using namespace std;
 
 class afd
 {
-private:
+public:
     vector<char> alfabeto;
     vector<string> estados;
     vector<string> estados_finais;
     vector<transicao> transicoes;
     string estado_inicial;
-public:
 
     //Construtor
     afd();
@@ -30,6 +29,8 @@ public:
     string prox_estado(const string& estado_atual, char s) const;
 
     void mostrar();
+
+    void processa_cadeia();
 
 
 };
