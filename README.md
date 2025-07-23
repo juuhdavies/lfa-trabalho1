@@ -1,6 +1,6 @@
 # Trabalho de Linguagens Formais e Automatos
-Alunos: Alexandre Alves Maciel Filho, Arthur G. S. Marques, Julia Davies
-================================================================================
+  Alunos: Alexandre Alves Maciel Filho, Arthur G. S. Marques, Julia Davies
+
 
 # Como usar
   Compilar: g++ transicao.cpp afd.cpp main.cpp -o leitor_de_afd
@@ -22,8 +22,6 @@ Alunos: Alexandre Alves Maciel Filho, Arthur G. S. Marques, Julia Davies
   (q2,a)=q1
   (q2,b)=q2
 
-================================================================================
-
 # Funcionalidades
   - Leitura de AFD a partir de arquivo texto
   - Conversão de AFD para gramática regular
@@ -43,4 +41,3 @@ Alunos: Alexandre Alves Maciel Filho, Arthur G. S. Marques, Julia Davies
       - ler_afd: Função que lê o afd no arquivo txt e armazena no objeto "automato";
       - ger_gramar: gera e imprime a gramática equivalente ao afd lido;
    
-================================================================================
