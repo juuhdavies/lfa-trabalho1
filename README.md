@@ -12,15 +12,15 @@
 
 # Formato esperado do Arquivo de Entrada
 
-  alfabeto={a,b,c}
-  estados={q0,q1,q2}
-  finais={q1,q2}
-  (q0,a)=q1
-  (q0,b)=q2
-  (q1,a)=q1
-  (q1,b)=q2
-  (q2,a)=q1
-  (q2,b)=q2
+  alfabeto={a,b,c} <br>
+  estados={q0,q1,q2} <br>
+  finais={q1,q2} <br>
+  (q0,a)=q1 <br>
+  (q0,b)=q2 <br>
+  (q1,a)=q1 <br>
+  (q1,b)=q2 <br>
+  (q2,a)=q1 <br>
+  (q2,b)=q2 <br>
 
 # Funcionalidades
   - Leitura de AFD a partir de arquivo texto
