@@ -75,11 +75,13 @@ afd ler_afd(const string& nome_arquivo){
 void ger_gramar(const string& estado_inicial, const vector<string>& estados_finais, const vector<transicao>& transicoes){
     map<string, vector<string>> gramatica;
 
+    //processa as transições
     for (const auto& t : transicoes) {
         string origem = t.estado_origem;
         string simbolo(1, t.simbolo);
         string destino = t.estado_destino;
 
+        //converte qX para seu equivalente no alfabeto em maiuscula
         int numero_origem = stoi(origem.substr(1));
         char origem_letra = static_cast<char>(65+numero_origem-1);
         string varOrigem = (origem == estado_inicial) ? "S" : string(1, origem_letra);
@@ -87,13 +89,16 @@ void ger_gramar(const string& estado_inicial, const vector<string>& estados_fina
         char destino_letra = static_cast<char>(65+numero_destino-1);
         string varDestino = (destino == estado_inicial) ? "S" : string(1, destino_letra);
 
+        //armazena na gramática de acordo com a varOrigem como key
         gramatica[varOrigem].push_back(simbolo + varDestino);
 
-        if (find(estados_finais.begin(), estados_finais.end(), destino) != estados_finais.end()) {
+        //desnecessário
+        /*if (find(estados_finais.begin(), estados_finais.end(), destino) != estados_finais.end()) {
             gramatica[varOrigem].push_back(simbolo);
-        }
+        }*/
     }
 
+    //trata os estados finais, adicionando uma produção vazia neles
     for (const auto& estado : estados_finais) {
         string origem = estado;
         int numero_origem = stoi(origem.substr(1));
@@ -102,8 +107,10 @@ void ger_gramar(const string& estado_inicial, const vector<string>& estados_fina
         gramatica[var].push_back("@");
     }
 
+    //imprime a gramática
     cout << "\nGramatica regular equivalente:\n";
 
+    //imprime primeiro as produções de S
     if (gramatica.count("S")) {
         const vector<string>& producoesS = gramatica["S"];
         cout << "S -> ";
@@ -115,6 +122,7 @@ void ger_gramar(const string& estado_inicial, const vector<string>& estados_fina
         cout << endl;
     }
 
+    //Imprime as demais produções pulando S
     for (auto it = gramatica.begin(); it != gramatica.end(); ++it) {
     const string& variavel = it->first;
     if (variavel == "S") continue;
@@ -137,13 +145,12 @@ int main()
     string nome_arquivo;
 
 
-    //por hora deixar só um arquivo e dps de ler usar o método de mostrar afd pra conferir
-    //Fazer um negócio lá de perguntar oq o usuário quer fazer ex: imprimir gramática, processar cadeia.
     cout << "Digite o nome do arquivo com a extensao: (nome.txt) " << endl;
     cin >> nome_arquivo;
     automato = ler_afd(nome_arquivo);
 
-    automato.mostrar();
+    //testar se o automato foi lido corretamente
+    //automato.mostrar();
 
     ger_gramar(automato.estado_inicial, automato.estados_finais, automato.transicoes);
 
