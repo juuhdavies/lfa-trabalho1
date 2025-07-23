@@ -5,6 +5,9 @@
 #include <string>
 #include <sstream>
 #include <algorithm>
+#include <map>
+#include <set>
+
 
 using namespace std;
 
@@ -69,6 +72,65 @@ afd ler_afd(const string& nome_arquivo){
     return automato;
 }
 
+void ger_gramar(const string& estado_inicial, const vector<string>& estados_finais, const vector<transicao>& transicoes){
+    map<string, vector<string>> gramatica;
+
+    for (const auto& t : transicoes) {
+        string origem = t.estado_origem;
+        string simbolo(1, t.simbolo);
+        string destino = t.estado_destino;
+
+        int numero_origem = stoi(origem.substr(1));
+        char origem_letra = static_cast<char>(65+numero_origem-1);
+        string varOrigem = (origem == estado_inicial) ? "S" : string(1, origem_letra);
+        int numero_destino = stoi(destino.substr(1));
+        char destino_letra = static_cast<char>(65+numero_destino-1);
+        string varDestino = (destino == estado_inicial) ? "S" : string(1, destino_letra);
+
+        gramatica[varOrigem].push_back(simbolo + varDestino);
+
+        if (find(estados_finais.begin(), estados_finais.end(), destino) != estados_finais.end()) {
+            gramatica[varOrigem].push_back(simbolo);
+        }
+    }
+
+    for (const auto& estado : estados_finais) {
+        string origem = estado;
+        int numero_origem = stoi(origem.substr(1));
+        char origem_letra = static_cast<char>(65+numero_origem-1);
+        string var = (estado == estado_inicial) ? "S" : string(1, origem_letra);
+        gramatica[var].push_back("@");
+    }
+
+    cout << "\nGramatica regular equivalente:\n";
+
+    if (gramatica.count("S")) {
+        const vector<string>& producoesS = gramatica["S"];
+        cout << "S -> ";
+        for (size_t i = 0; i < producoesS.size(); ++i) {
+            cout << producoesS[i];
+            if (i < producoesS.size() - 1)
+                cout << " | ";
+        }
+        cout << endl;
+    }
+
+    for (auto it = gramatica.begin(); it != gramatica.end(); ++it) {
+    const string& variavel = it->first;
+    if (variavel == "S") continue;
+
+    const vector<string>& producoes = it->second;
+
+    cout << variavel << " -> ";
+    for (size_t i = 0; i < producoes.size(); ++i) {
+        cout << producoes[i];
+        if (i < producoes.size() - 1)
+            cout << " | ";
+    }
+    cout << endl;
+    }
+}
+
 int main()
 {
     afd automato;
@@ -77,10 +139,29 @@ int main()
 
     //por hora deixar só um arquivo e dps de ler usar o método de mostrar afd pra conferir
     //Fazer um negócio lá de perguntar oq o usuário quer fazer ex: imprimir gramática, processar cadeia.
+    cout << "Digite o nome do arquivo com a extensao: (nome.txt) " << endl;
     cin >> nome_arquivo;
     automato = ler_afd(nome_arquivo);
 
     automato.mostrar();
 
+    ger_gramar(automato.estado_inicial, automato.estados_finais, automato.transicoes);
 
+    automato.processa_cadeia();
+    int op=0;
+    while(op!=2){
+            cout << "\nDeseja processar mais palavras?\n1 - Sim\n2 - Nao" << endl;
+            cin >> op;
+        switch(op){
+        case 1:
+            automato.processa_cadeia();
+            break;
+        case 2:
+            break;
+        default:
+            cout << "Opcao Invalida. Insira novamente." << endl;
+            break;
+        }
+    }
+    return 0;
 }
