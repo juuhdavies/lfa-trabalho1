@@ -72,20 +72,23 @@ void afd::mostrar(){
 
 }
 
+//
 void afd::processa_cadeia(){
     string palavra;
 
+    //lê palavra para processar
     cout << "Palavra para processar: ";
     cin >> palavra;
 
     cout << "[" + estado_inicial + "]" + palavra << endl;
 
+    //rejeita se for vazia e não estado final
     if(palavra=="@"){
         if(eh_estado_final(estado_inicial)) cout << "ACEITA" << endl;
         else cout << "REJEITA" << endl;
     }
     else{
-        bool aceita = true;
+        bool aceita = true; //flag de controle
         string estado_atual = estado_inicial;
 
         while(!palavra.empty()&&aceita){
@@ -102,3 +105,4 @@ void afd::processa_cadeia(){
         aceita? cout<<"ACEITA"<<endl : cout<<"REJEITA"<<endl;
     }
 }
+
